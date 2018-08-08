@@ -1,10 +1,11 @@
 package com.squirrel.rabbit;
 
-import com.SquirrelWebObject;
-import com.graph.VisualisationGraph;
 import com.squirrel.Application;
 import com.squirrel.Utilities.HTMLReader;
 import com.squirrel.Utilities.TemplateHelper;
+
+import org.dice_research.squirrel.web.SquirrelWebObject;
+import org.dice_research.squirrel.web.graph.VisualisationGraph;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

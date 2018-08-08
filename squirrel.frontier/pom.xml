@@ -4,18 +4,25 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.dice-research</groupId>
-        <artifactId>squirrel.parent</artifactId>
+        <artifactId>squirrel</artifactId>
         <version>0.3.0-SNAPSHOT</version>
-        <relativePath>../squirrel-parent</relativePath>
     </parent>
     <artifactId>squirrel.frontier</artifactId>
     <packaging>jar</packaging>
     <name>Squirrel Frontier</name>
 
+    <properties>
+        <project.local.repo.url>file://${project.parent.basedir}/repository</project.local.repo.url>
+    </properties>
+
     <dependencies>
         <dependency>
-            <groupId>org.dice_research</groupId>
+            <groupId>org.dice-research</groupId>
             <artifactId>squirrel.api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.dice-research</groupId>
+            <artifactId>squirrel.web-api</artifactId>
         </dependency>
 
         <!-- ~~~~~~~~~~~~~~~~~~~ Testing ~~~~~~~~~~~~~~~~~~~~~~ -->

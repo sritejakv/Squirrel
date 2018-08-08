@@ -1,14 +1,14 @@
 package com.squirrel.rabbit;
 
-import com.SquirrelWebObject;
-import com.graph.VisualisationGraph;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-import org.aksw.simba.squirrel.data.uri.CrawleableUriFactoryImpl;
-import org.aksw.simba.squirrel.data.uri.serialize.Serializer;
-import org.aksw.simba.squirrel.data.uri.serialize.java.GzipJavaUriSerializer;
-import org.aksw.simba.squirrel.rabbit.msgs.UriSet;
+import org.dice_research.squirrel.data.uri.CrawleableUriFactoryImpl;
+import org.dice_research.squirrel.data.uri.serialize.Serializer;
+import org.dice_research.squirrel.data.uri.serialize.java.GzipJavaUriSerializer;
+import org.dice_research.squirrel.rabbit.msgs.UriSet;
+import org.dice_research.squirrel.web.SquirrelWebObject;
+import org.dice_research.squirrel.web.graph.VisualisationGraph;
 import org.apache.commons.io.IOUtils;
 import org.hobbit.core.rabbit.*;
 import org.slf4j.Logger;
@@ -25,7 +25,7 @@ import java.util.concurrent.TimeoutException;
 
 /**
  * The interface between the RabbitMQ and the Web-Service
- * Or better to say: Listener for the RabbitMQ - receives and organize the {@link SquirrelWebObject}s and the {@link com.graph.VisualisationGraph}s
+ * Or better to say: Listener for the RabbitMQ - receives and organize the {@link SquirrelWebObject}s and the {@link org.dice_research.squirrel.web.graph.VisualisationGraph}s
  * @author Philipp Heinisch
  */
 public class RabbitMQListener implements Runnable, DataHandler {
