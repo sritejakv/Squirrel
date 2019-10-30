@@ -118,7 +118,7 @@ public final class PredictorImpl implements Predictor {
 
 
     @Override
-    public void train() {
+    public void train(String filePath) {
         updater = new AdaptiveFTRLRegularizer(beta,l1 ,l2);
         StochasticGradientDescent sgd = StochasticGradientDescentBuilder
             .create(0.01) // learning rate
@@ -134,17 +134,31 @@ public final class PredictorImpl implements Predictor {
         learner.setNumPasses(2);
         learner.verbose();
         // train the model
-        this.model = learner.train(() -> setupStream());
+        this.model = learner.train(() -> setupStream(filePath));
         // output the weights
         //model.getWeights().iterateNonZero().forEachRemaining(System.out::println);
 
     }
 
-    private Stream<FeatureOutcomePair> setupStream(){
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream(TRAINING_SET_PATH)
-            , Charset.defaultCharset()));
-        return reader.lines().map((s) -> parseFeature(s));
+    private Stream<FeatureOutcomePair> setUpStream(String filePath) {
+        URL url = null;
+        try {
+            url = new URL(filePath);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader((new InputStreamReader(url.openStream())));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            String line = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return br.lines().map((s) -> parseFeature(s));
     }
 
     private FeatureOutcomePair parseFeature(String line) {
@@ -152,7 +166,7 @@ public final class PredictorImpl implements Predictor {
 
         URI furi = null;
         try {
-            furi = new URI(split[1]);
+            furi = new URI(split[0]);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -161,7 +175,7 @@ public final class PredictorImpl implements Predictor {
         Object featureArray = uri.getData(Constants.FEATURE_VECTOR);
         double[] doubleFeatureArray = (double[]) featureArray;
         DoubleVector features = new SequentialSparseDoubleVector(doubleFeatureArray);
-        return new FeatureOutcomePair(features, split[0].equals("RDF")? POSITIVE_CLASS : NEGATIVE_CLASS);
+        return new FeatureOutcomePair(features, split[1].equals("dereferenceable")? POSITIVE_CLASS : NEGATIVE_CLASS);
     }
 
     @Override

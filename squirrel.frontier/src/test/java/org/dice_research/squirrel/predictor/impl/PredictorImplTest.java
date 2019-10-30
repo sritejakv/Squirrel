@@ -32,7 +32,7 @@ public class PredictorImplTest {
         predictor.TRAINING_SET_PATH = "trainDataset.txt";
 
         // train the learner on two URIs: one RDF and one non RDF
-        predictor.train();
+        predictor.train("https://hobbitdata.informatik.uni-leipzig.de/squirrel/lodstats-seeds.csv");
 
         // predict for a random URI(HTML) example
         predictor.featureHashing(curi);
