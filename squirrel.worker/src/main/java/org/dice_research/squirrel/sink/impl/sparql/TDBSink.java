@@ -15,6 +15,7 @@ import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.StmtIterator;
+import org.apache.jena.sparql.core.Quad;
 import org.apache.jena.update.UpdateExecutionFactory;
 import org.apache.jena.update.UpdateFactory;
 import org.apache.jena.update.UpdateProcessor;
@@ -22,24 +23,24 @@ import org.apache.jena.update.UpdateRequest;
 import org.dice_research.squirrel.Constants;
 import org.dice_research.squirrel.data.uri.CrawleableUri;
 import org.dice_research.squirrel.sink.Sink;
-import org.dice_research.squirrel.sink.tripleBased.AdvancedTripleBasedSink;
+import org.dice_research.squirrel.sink.triplebased.AdvancedTripleBasedSink;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * A sink which stores the data in different graphs in a sparql based db.
  */
-public class TDBSink extends AbstractBufferingTripleBasedSink implements AdvancedTripleBasedSink, Sink {
+public class TDBSink extends AbstractBufferingSink implements AdvancedTripleBasedSink, Sink {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TDBSink.class);
     /**
      * The URI to the metadata DB in which updates can be performed.
      */
     private final String updateMetaDataUri;
-    /**
-     * The URI to the metadata DB in which querys can be performed.
-     */
-    private final String queryMetaDataUri;
+//    /**
+//     * The URI to the metadata DB in which querys can be performed.
+//     */
+//    private final String queryMetaDataUri;
 
     /**
      * The URI of the DB in which updates can be performed.
@@ -78,7 +79,7 @@ public class TDBSink extends AbstractBufferingTripleBasedSink implements Advance
         updateDatasetURI = prefix + updateAppendix;
         queryDatasetURI = prefix + queryAppendix;
         updateMetaDataUri = prefix + updateMetaDataAppendix;
-        queryMetaDataUri = prefix + queryMetaDataAppendix;
+//        queryMetaDataUri = prefix + queryMetaDataAppendix;
     }
 
     @Override
@@ -171,6 +172,18 @@ public class TDBSink extends AbstractBufferingTripleBasedSink implements Advance
 
     public String getUpdateDatasetURI() {
         return updateDatasetURI;
+    }
+
+    @Override
+    protected void sendQuads(CrawleableUri uri, Collection<Quad> buffer) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void flushMetadata() {
+        // TODO Auto-generated method stub
+        
     }
 
 }

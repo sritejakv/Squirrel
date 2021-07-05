@@ -99,14 +99,21 @@ public class InMemoryKnownUriFilter implements KnownUriFilter {
 
 
     private class UriInfo {
-        long lastCrawlTimestamp;
-        long nextCrawlTimestamp;
-        boolean crawlingInProcess;
+        private long lastCrawlTimestamp;
+        private long nextCrawlTimestamp;
+        private boolean crawlingInProcess;
 
         UriInfo(long lastCrawlTimestamp, long nextCrawlTimestamp, boolean crawlingInProcess) {
             this.lastCrawlTimestamp = lastCrawlTimestamp;
             this.nextCrawlTimestamp = nextCrawlTimestamp;
             this.crawlingInProcess = crawlingInProcess;
         }
+    }
+
+
+    @Override
+    public void open() {
+        // TODO Auto-generated method stub
+        
     }
 }
